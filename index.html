@@ -3,38 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>윤성일 선생님의 웹 프로젝트</title>
+<title>전산회계 오락실 — 게임으로 배우는 전산회계 2급·1급</title>
+<meta name="description" content="전산회계 오락실은 상업정보 계열 고등학생과 전산회계 자격증 준비생을 위한 게임형 학습 사이트입니다. 계정과목 암기, 분개, 결산분개, 장부조회를 미니게임으로 연습하고, 기출 변형 이론 문제와 오답노트, 학급 팀전 대항까지 한 곳에서 할 수 있습니다.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7418287954060066" crossorigin="anonymous"></script>
 <style>
-  :root{ --bg:#020810; --card:#0c1626; --line:rgba(255,255,255,.08); --blue:#00f2ff; --txt:#eaf2ff; --dim:rgba(234,242,255,.55); }
+  :root{ --bg:#020810; --card:#0c1626; --line:rgba(255,255,255,.08); --blue:#00f2ff; --gold:#ffd23f; --txt:#eaf2ff; --dim:rgba(234,242,255,.62); }
   *{box-sizing:border-box;}
   body{
-    margin:0; min-height:100vh; background:var(--bg); color:var(--txt);
+    margin:0; background:var(--bg); color:var(--txt);
     font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
-    display:flex; align-items:center; justify-content:center; padding:24px;
+    line-height:1.65;
   }
-  .wrap{ max-width:420px; width:100%; text-align:center; }
-  h1{ font-size:1.3rem; margin:0 0 8px; }
-  p{ color:var(--dim); font-size:.9rem; margin:0 0 28px; line-height:1.6; }
+  .wrap{ max-width:640px; margin:0 auto; padding:40px 22px 64px; }
+  header{ text-align:center; margin-bottom:36px; }
+  .eyebrow{ font-size:.78rem; letter-spacing:.08em; color:var(--blue); font-weight:700; margin-bottom:10px; }
+  h1{ font-size:1.55rem; margin:0 0 12px; line-height:1.4; }
+  header p{ color:var(--dim); font-size:.95rem; margin:0; }
+
   a.card{
     display:block; background:var(--card); border:1px solid var(--line); border-radius:16px;
-    padding:20px; text-decoration:none; color:var(--txt); transition:.15s;
+    padding:22px; text-decoration:none; color:var(--txt); transition:.15s; margin:28px 0 40px;
   }
   a.card:active{ transform:scale(.98); }
-  .card .icon{ font-size:2rem; margin-bottom:8px; }
-  .card .name{ font-weight:700; font-size:1.05rem; margin-bottom:4px; }
-  .card .desc{ font-size:.82rem; color:var(--dim); }
+  .card .icon{ font-size:2.1rem; margin-bottom:8px; }
+  .card .name{ font-weight:700; font-size:1.15rem; margin-bottom:4px; }
+  .card .desc{ font-size:.85rem; color:var(--dim); }
+  .card .go{ margin-top:10px; font-size:.82rem; color:var(--blue); font-weight:700; }
+
+  section{ margin:36px 0; }
+  h2{ font-size:1.1rem; margin:0 0 12px; color:var(--txt); }
+  section p{ color:var(--dim); font-size:.92rem; margin:0 0 14px; }
+
+  .feature-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px; }
+  @media (max-width:420px){ .feature-grid{ grid-template-columns:1fr; } }
+  .feature{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .feature .f-title{ font-weight:700; font-size:.88rem; margin-bottom:4px; }
+  .feature .f-desc{ font-size:.78rem; color:var(--dim); line-height:1.5; }
+
+  .who{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+  .who span{ background:rgba(0,242,255,.08); border:1px solid rgba(0,242,255,.25); color:var(--blue);
+    font-size:.78rem; padding:6px 12px; border-radius:999px; }
+
+  footer{ margin-top:52px; padding-top:20px; border-top:1px solid var(--line); text-align:center; }
+  footer p{ color:rgba(234,242,255,.4); font-size:.76rem; margin:4px 0; }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>윤성일 선생님의 웹 프로젝트</h1>
-    <p>아래 프로젝트로 이동하세요.</p>
-    <a class="card" href="/account-game-level2-mobile/">
-      <div class="icon">🎮</div>
-      <div class="name">전산회계 오락실</div>
-      <div class="desc">전산회계 2급·1급 게임형 학습 플랫폼</div>
-    </a>
-  </div>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">전산회계 2급 · 1급 자격증 대비</div>
+    <h1>시험 준비를, 문제집 대신<br>게임으로 하는 방법</h1>
+    <p>고등학교 상업정보 교사가 직접 만든, 전산회계 자격증 게임형 학습 사이트입니다.</p>
+  </header>
+
+  <a class="card" href="/account-game-level2-mobile/">
+    <div class="icon">🎮</div>
+    <div class="name">전산회계 오락실 바로가기</div>
+    <div class="desc">회원가입 없이 닉네임만으로 바로 시작할 수 있어요.</div>
+    <div class="go">시작하기 →</div>
+  </a>
+
+  <section>
+    <h2>전산회계 오락실이란?</h2>
+    <p>
+      전산회계 2급은 계정과목을 외우고, 거래를 분개하고, 결산까지 손에 익혀야 하는
+      암기·반복 과목입니다. 문제집만으로 반복하면 금방 지치기 쉬워서, 같은 반복 학습을
+      미니게임 형태로 바꿔 만든 것이 전산회계 오락실입니다.
+    </p>
+    <p>
+      계정과목을 맞히며 떨어지는 산성비를 피하고, 카드를 뒤집어 계정과 뜻을 짝짓고,
+      분개 전표를 빠르게 완성하고, 결산 분개를 조립하고, 장부를 조회해 정답을 찾는
+      5가지 게임으로 2급 전 범위를 반복합니다. 점수와 랭킹이 있어 혼자 풀어도 지루하지
+      않고, 학급 단위 팀전을 켜면 수업 시간에 반 전체가 같이 겨룰 수도 있습니다.
+    </p>
+  </section>
+
+  <section>
+    <h2>무엇을 할 수 있나요</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="f-title">🎮 미니게임 5종 (2급)</div>
+        <div class="f-desc">계정과목 암기부터 분개·결산·장부조회까지, 시험 범위를 게임으로 반복 연습합니다.</div>
+      </div>
+      <div class="feature">
+        <div class="f-title">🏭 1급 스테이지 5종</div>
+        <div class="f-desc">원가배분·자본거래·매입매출전표·부가세 신고서까지, 1급 실무 범위를 어드벤처 형식으로 다룹니다.</div>
+      </div>
+      <div class="feature">
+        <div class="f-title">📝 기출 변형 이론 문제</div>
+        <div class="f-desc">실제 기출 유형을 원작 문항으로 재구성한 객관식 문제를 주제별로 풀고, 해설까지 바로 확인합니다.</div>
+      </div>
+      <div class="feature">
+        <div class="f-title">🗂️ 오답노트</div>
+        <div class="f-desc">틀린 문제만 자동으로 모여서, 약점만 골라 다시 풀 수 있습니다.</div>
+      </div>
+      <div class="feature">
+        <div class="f-title">🏆 학급 팀전</div>
+        <div class="f-desc">모둠을 나눠 실시간 전광판으로 순위를 겨루는 수업용 대항전 모드입니다.</div>
+      </div>
+      <div class="feature">
+        <div class="f-title">📈 성장 기록</div>
+        <div class="f-desc">판마다 점수가 쌓여, 시간이 지나며 실력이 느는 과정을 그래프로 볼 수 있습니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>이런 분들이 씁니다</h2>
+    <p>상업정보 계열 고등학교 수업, 그리고 전산회계 자격증을 개인적으로 준비하는 학생 모두 무료로 쓸 수 있습니다.</p>
+    <div class="who">
+      <span>상업정보과 고등학생</span>
+      <span>전산회계 2급 준비생</span>
+      <span>전산회계 1급 준비생</span>
+      <span>회계 수업 교사</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>전산회계 오락실 · 웹으로 바로 플레이 (회원가입 불필요)</p>
+    <p>문의: 사이트 운영 학교 상업정보과</p>
+  </footer>
+
+</div>
 </body>
 </html>
