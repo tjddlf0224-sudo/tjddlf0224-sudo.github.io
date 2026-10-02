@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /promo/
 Sitemap: https://tjddlf0224-sudo.github.io/sitemap.xml
