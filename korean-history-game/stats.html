@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>이용 통계 · 타임슬립 한국사</title>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Hahmlet:wght@700;800&display=swap" rel="stylesheet">
+<!--
+  이용 통계 — 성일님(관리자)만 보는 화면 (2026-09-30)
+  · 웹에서만 연다: https://tjddlf0224-sudo.github.io/korean-history-game/stats.html  (앱 번들에서는 prune_bundle.py 가 뺀다)
+  · 구글 로그인 → firestore.rules 의 isAdmin() 에 든 계정만 읽힌다. 다른 계정은 "권한 없음".
+  · 읽는 것: khg_day(날짜 합계) · khg_chstat(챕터 합계) · khg_chday(날짜×챕터) · khg_errlog(오류) — 전부 사람과 무관한 합계.
+    쌓는 쪽은 assets/telemetry.js.
+  · ?demo=1 을 붙이면 로그인 없이 **가짜 숫자**로 화면 모양만 본다(예시라고 크게 적힌다).
+-->
+<style>
+  :root { --bg:#15110c; --panel:#1f1810; --line:#3a2c1a; --ink:#e8dcc2; --dim:#a39477; --faint:#6f6450;
+          --gold:#f0c96b; --start:#c9a24a; --done:#7fb069; --loss:#d9694f; --bar:#2c2216; }
+  * { box-sizing:border-box; word-break:keep-all; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:"Gowun Batang",serif; font-size:15px; line-height:1.7; }
+  main { max-width:1080px; margin:0 auto; padding:28px 16px 80px; }
+  header { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-bottom:18px; }
+  h1 { font-size:22px; color:var(--gold); margin:0; flex:1 1 auto; }
+  h2 { font-size:17px; color:var(--gold); margin:0 0 4px; }
+  .sub { font-size:13px; color:var(--dim); margin:0 0 14px; }
+  button { font-family:inherit; font-size:13.5px; color:var(--ink); background:#2a2013; border:1px solid #4a3c26; border-radius:10px; padding:8px 14px; cursor:pointer; }
+  button:hover { border-color:#6a5433; }
+  button:focus-visible, .row:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+  .who { font-size:13px; color:var(--dim); }
+  section { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 18px 16px; margin-bottom:16px; }
+  .demo { background:#4a1d12; border:1px solid #8d3a24; color:#ffd9c9; border-radius:10px; padding:10px 14px; margin-bottom:16px; font-weight:700; }
+  .msg { padding:30px 10px; text-align:center; color:var(--dim); }
+
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; }
+  .tile .k { font-size:12.5px; color:var(--dim); }
+  .tile .v { font-size:28px; font-weight:700; color:var(--ink); line-height:1.25; font-variant-numeric:tabular-nums; }
+  .tile .n { font-size:12px; color:var(--faint); }
+
+  .chart { width:100%; overflow-x:auto; }
+  svg text { font-family:inherit; fill:var(--dim); font-size:11px; }
+
+  .legend { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:12.5px; color:var(--dim); margin:0 0 10px; }
+  .legend i { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-2px; margin-right:5px; }
+  .tbl { overflow-x:auto; }
+  .fn { min-width:720px; }
+  .row, .hd { display:grid; grid-template-columns:200px 1fr 58px 58px 62px 84px; gap:10px; align-items:center; }
+  .hd { font-size:12px; color:var(--faint); padding:0 8px 6px; border-bottom:1px solid var(--line); }
+  .hd span:nth-child(n+3), .row .num { text-align:right; font-variant-numeric:tabular-nums; }
+  .row { padding:5px 8px; border-radius:8px; cursor:pointer; border:1px solid transparent; }
+  .row:hover, .row.on { background:#261d12; border-color:var(--line); }
+  .row .nm { font-size:13.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .row .nm small { color:var(--faint); font-size:11.5px; margin-right:6px; }
+  .era { font-size:12px; color:var(--gold); padding:10px 8px 2px; letter-spacing:.04em; }
+  .track { position:relative; height:16px; background:var(--bar); border-radius:4px; overflow:hidden; }
+  .track b { position:absolute; left:0; top:0; bottom:0; background:var(--start); border-radius:4px; }
+  .track u { position:absolute; left:0; top:0; bottom:0; background:var(--done); border-radius:4px; }
+  .num.low { color:var(--loss); font-weight:700; }
+  .num.z { color:var(--faint); }
+
+  .necks { display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:10px; margin:0 0 16px; padding:0; list-style:none; }
+  .necks li { border:1px solid #5c2c1e; background:#2a1710; border-radius:10px; padding:10px 12px; font-size:13.5px; }
+  .necks b { color:#ffb59f; font-size:18px; font-variant-numeric:tabular-nums; }
+  .necks span { display:block; color:var(--dim); font-size:12.5px; }
+
+  .steps { display:grid; grid-template-columns:repeat(auto-fit, minmax(30px, 1fr)); gap:4px; align-items:end; height:150px; margin-top:8px; }
+  .steps div { position:relative; background:var(--start); border-radius:3px 3px 0 0; min-height:2px; }
+  .steps div.end { background:var(--done); }
+  .steps div span { position:absolute; left:0; right:0; top:-18px; text-align:center; font-size:11px; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .stepx { display:grid; grid-template-columns:repeat(auto-fit, minmax(30px, 1fr)); gap:4px; font-size:10.5px; color:var(--faint); text-align:center; margin-top:4px; }
+
+  table { border-collapse:collapse; width:100%; font-size:12.5px; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--faint); font-weight:400; }
+  td.m { color:var(--ink); max-width:420px; word-break:break-all; }
+  td.c { color:var(--dim); white-space:nowrap; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>타임슬립 한국사 · 이용 통계</h1>
+    <span class="who" id="who"></span>
+    <button id="login">구글로 로그인</button>
+    <button id="reload" hidden>새로 읽기</button>
+    <button id="logout" hidden>로그아웃</button>
+  </header>
+  <div id="demo" class="demo" hidden>예시 화면입니다 — 아래 숫자는 모양을 보려고 만든 가짜 숫자입니다.</div>
+  <div id="gate" class="msg">관리자 계정으로 로그인하면 통계가 보입니다.</div>
+
+  <div id="body" hidden>
+    <section>
+      <h2>요즘</h2>
+      <p class="sub">날짜는 한국 시간 기준입니다. 기기 수는 앱을 켠 기기를 하루 한 번 센 것입니다.</p>
+      <div class="tiles" id="tiles"></div>
+    </section>
+
+    <section>
+      <h2>하루에 앱을 켠 기기 수 (최근 30일)</h2>
+      <p class="sub">막대 위에 마우스를 올리면 그날의 숫자가 나옵니다.</p>
+      <div class="chart" id="dauChart"></div>
+    </section>
+
+    <section>
+      <h2>어디서 많이 빠지나</h2>
+      <p class="sub">"화 안에서"는 그 화를 시작하고 끝내지 않은 기기 수, "다음 화로"는 그 화를 끝냈는데 다음 화를 시작하지 않은 기기 수입니다.</p>
+      <ul class="necks" id="necks"></ul>
+
+      <h2>챕터별 흐름</h2>
+      <p class="sub">기기 수 기준(한 기기는 한 번만 셉니다). 줄을 누르면 그 화 안에서 어느 단계까지 갔는지 나옵니다.</p>
+      <div class="legend"><span><i style="background:var(--start)"></i>시작한 기기</span><span><i style="background:var(--done)"></i>끝낸 기기</span><span>완주율 = 끝낸 기기 ÷ 시작한 기기</span><span>다음 화 = 다음 화를 시작한 기기 ÷ 이 화를 끝낸 기기</span></div>
+      <div class="tbl"><div class="fn">
+        <div class="hd"><span>챕터</span><span></span><span>시작</span><span>완주</span><span>완주율</span><span>다음 화로</span></div>
+        <div id="funnel"></div>
+      </div></div>
+    </section>
+
+    <section id="detail" hidden>
+      <h2 id="dTitle"></h2>
+      <p class="sub" id="dSub"></p>
+      <div class="steps" id="dSteps"></div>
+      <div class="stepx" id="dX"></div>
+    </section>
+
+    <section>
+      <h2>최근 오류</h2>
+      <p class="sub">앱에서 난 오류 가운데 최근 20건입니다. 누구의 기기인지는 담지 않습니다.</p>
+      <div class="tbl" id="errs"></div>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/firebase/firebase-app-compat.js"></script>
+<script src="vendor/firebase/firebase-auth-compat.js"></script>
+<script src="vendor/firebase/firebase-firestore-compat.js"></script>
+<script src="assets/firebase_config.js"></script>
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const DEMO = /[?&]demo=1/.test(location.search);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+  const n0 = v => (+v || 0);
+  const fmt = v => n0(v).toLocaleString('ko-KR');
+  const pct = (a, b) => b > 0 ? Math.round(a / b * 100) + '%' : '–';
+  const kst = off => new Date(Date.now() + 9 * 3600 * 1000 - (off || 0) * 86400000).toISOString().slice(0, 10);
+
+  /* 챕터 목록·이름은 게임 목록 화면(index.html)의 ERAS 에서 뽑아 둔 chapters.txt 를 읽는다(2026-10-03 게임 저장소 비공개 전환 때 옮김) */
+  async function chapters(){
+    const t = await (await fetch('chapters.txt', { cache: 'no-store' })).text();
+    const out = []; let era = '';
+    const re = /\{ title: '([^']+)'|\{ href: '([a-z0-9_]+)\.html', num: '([^']+)', name: '([^']+)'/g;
+    let m; while ((m = re.exec(t))){ if (m[1]) era = m[1]; else out.push({ id: m[2], num: m[3], name: m[4], era }); }
+    return out;
+  }
+
+  /* ---------- 읽기 ---------- */
+  async function load(db){
+    const FP = firebase.firestore.FieldPath.documentId();
+    const [days, chs, cds, errs] = await Promise.all([
+      db.collection('khg_day').orderBy(FP).startAt(kst(29)).endAt(kst(0)).get(),
+      db.collection('khg_chstat').get(),
+      db.collection('khg_chday').orderBy(FP).startAt(kst(6)).endAt(kst(0) + '~').get(),
+      db.collection('khg_errlog').orderBy('when', 'desc').limit(20).get(),
+    ]);
+    const day = {}, ch = {}, week = {};
+    days.forEach(d => day[d.id] = d.data());
+    chs.forEach(d => ch[d.id] = d.data());
+    cds.forEach(d => { const id = d.id.split('__')[1]; const w = week[id] || (week[id] = { enter: 0, done: 0 }); w.enter += n0(d.data().enter); w.done += n0(d.data().done); });
+    const el = []; errs.forEach(d => { if (d.data().ch !== 'qa_check') el.push(d.data()); });   // qa_check = 규칙 게시 뒤 점검용으로 넣은 문서
+    return { day, ch, week, errs: el };
+  }
+  function demoData(list){
+    const day = {}, ch = {}, week = {};
+    for (let i = 29; i >= 0; i--){ const v = Math.round(40 + 30 * Math.sin(i / 4) + (29 - i) * 1.5); day[kst(i)] = { dau: v, ios: Math.round(v * .55), android: Math.round(v * .35), web: Math.round(v * .1), newDev: Math.round(v * .2), back7: Math.round(v * .06), plays: v * 2, dones: Math.round(v * 1.1), r1: Math.round(v * .2 * .42), r7: Math.round(v * .2 * .18) }; }
+    let cur = 900;
+    list.forEach((c, i) => {
+      const start = Math.round(cur), done = Math.round(start * (i === 3 ? .55 : .78 + (i % 5) * .03));
+      const o = { uEnter: start, uDone: done, enter: Math.round(start * 1.6), done: Math.round(done * 1.2) };
+      const steps = 8 + (i % 6); for (let k = 1; k <= steps; k++) o['s' + k] = Math.round(start - (start - done) * Math.pow(k / steps, i === 3 ? .4 : 1.2));
+      ch[c.id] = o; week[c.id] = { enter: Math.round(start / 12), done: Math.round(done / 12) };
+      cur = done * (i === 9 ? .6 : .9);
+    });
+    return { day, ch, week, errs: [{ when: new Date().toISOString(), ch: 'ch3.html', zone: 'palace', msg: '예시 오류 메시지', at: 'ch3.html:1234', n: 3, p: 'ios', v: '311' }] };
+  }
+
+  /* ---------- 그리기 ---------- */
+  function tiles(D){
+    const t = D.day[kst(0)] || {}, last7 = [0,1,2,3,4,5,6].map(i => D.day[kst(i)] || {});
+    const sum = f => last7.reduce((a, d) => a + n0(d[f]), 0);
+    // 재방문: 처음 온 날(cohort) 문서에 r1·r7 이 쌓인다. 아직 그날이 안 온 cohort 는 빼고 센다(lag 일 전까지).
+    const coh = (f, lag) => { let a = 0; for (let i = lag; i < lag + 14; i++) a += n0((D.day[kst(i)] || {})[f]); return a; };
+    const T = [
+      ['오늘 켠 기기', fmt(t.dau), `iOS ${fmt(t.ios)} · 안드로이드 ${fmt(t.android)} · 웹 ${fmt(t.web)}`],
+      ['최근 7일 하루 평균', fmt(Math.round(sum('dau') / 7)), '기기 수'],
+      ['최근 7일 처음 온 기기', fmt(sum('newDev')), '앱을 처음 켠 기기'],
+      ['최근 7일 돌아온 기기', fmt(sum('back7')), '7일 넘게 쉬다 다시 켠 기기'],
+      ['오늘 챕터 시작 · 완주', fmt(t.plays) + ' · ' + fmt(t.dones), '횟수(같은 기기가 여러 번 할 수 있음)'],
+      ['다음 날 다시 온 비율', pct(coh('r1', 1), coh('newDev', 1)), '최근 2주에 처음 온 기기 기준'],
+      ['7일 뒤 다시 온 비율', pct(coh('r7', 7), coh('newDev', 7)), '7일이 지난 기기만 셈'],
+    ];
+    $('tiles').innerHTML = T.map(x => `<div class="tile"><div class="k">${x[0]}</div><div class="v">${x[1]}</div><div class="n">${x[2]}</div></div>`).join('');
+  }
+  function dauChart(D){
+    const days = []; for (let i = 29; i >= 0; i--) days.push(kst(i));
+    const vals = days.map(d => n0((D.day[d] || {}).dau));
+    const max = Math.max(1, ...vals), W = 900, H = 190, L = 34, B = 24, T = 14, bw = (W - L - 6) / days.length;
+    const y = v => T + (H - T - B) * (1 - v / max);
+    const ticks = [0, Math.ceil(max / 2), max].filter((v, i, a) => a.indexOf(v) === i);
+    let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="최근 30일 하루 이용 기기 수">`;
+    ticks.forEach(v => { s += `<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="#3a2c1a" stroke-width="1"/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${fmt(v)}</text>`; });
+    days.forEach((d, i) => {
+      const x = L + i * bw + 2, v = vals[i], h = Math.max(v ? 2 : 0, H - B - y(v));
+      const dd = D.day[d] || {};
+      s += `<rect x="${x}" y="${H - B - h}" width="${Math.max(2, bw - 4)}" height="${h}" rx="2" fill="${i === days.length - 1 ? '#f0c96b' : '#c9a24a'}"><title>${d}: ${fmt(v)}대 (처음 ${fmt(dd.newDev)} · 돌아옴 ${fmt(dd.back7)})</title></rect>`;
+      if (i % 5 === 4 || i === days.length - 1) s += `<text x="${x + (bw - 4) / 2}" y="${H - 8}" text-anchor="middle">${d.slice(5).replace('-', '/')}</text>`;
+    });
+    $('dauChart').innerHTML = s + '</svg>';
+  }
+  function funnel(D, list){
+    const main = list.filter(c => c.id !== 'sesi');
+    const max = Math.max(1, ...list.map(c => n0((D.ch[c.id] || {}).uEnter)));
+    const necks = [];
+    let html = '', era = '';
+    list.forEach(c => {
+      const v = D.ch[c.id] || {}, st = n0(v.uEnter), dn = n0(v.uDone);
+      const i = main.indexOf(c), nx = i >= 0 && main[i + 1] ? n0((D.ch[main[i + 1].id] || {}).uEnter) : null;
+      if (c.era !== era){ era = c.era; html += `<div class="era">${esc(era)}</div>`; }
+      const rate = st ? dn / st : null, go = (nx != null && dn) ? nx / dn : null;
+      if (st - dn > 0) necks.push({ n: st - dn, r: pct(st - dn, st), where: `${c.num} 화 안에서`, note: `시작 ${fmt(st)} → 완주 ${fmt(dn)}`, id: c.id });
+      if (nx != null && dn - nx > 0) necks.push({ n: dn - nx, r: pct(dn - nx, dn), where: `${c.num} → ${main[i + 1].num}`, note: `완주 ${fmt(dn)} → 다음 화 시작 ${fmt(nx)}`, id: main[i + 1].id });
+      html += `<div class="row" tabindex="0" role="button" data-id="${c.id}" aria-label="${esc(c.num + ' ' + c.name)} 자세히">
+        <span class="nm"><small>${esc(c.num)}</small>${esc(c.name)}</span>
+        <span class="track"><b style="width:${st / max * 100}%"></b><u style="width:${dn / max * 100}%"></u></span>
+        <span class="num${st ? '' : ' z'}">${fmt(st)}</span><span class="num${dn ? '' : ' z'}">${fmt(dn)}</span>
+        <span class="num${rate != null && rate < .6 ? ' low' : ''}">${pct(dn, st)}</span>
+        <span class="num${go != null && go < .6 ? ' low' : ''}">${nx == null ? '' : pct(nx, dn)}</span></div>`;
+    });
+    $('funnel').innerHTML = html;
+    necks.sort((a, b) => b.n - a.n);
+    $('necks').innerHTML = necks.length
+      ? necks.slice(0, 6).map(k => `<li><b>${fmt(k.n)}대</b> (${k.r}) 빠짐<span>${esc(k.where)} · ${esc(k.note)}</span></li>`).join('')
+      : '<li>아직 빠진 곳을 말할 만큼 기록이 모이지 않았습니다.</li>';
+    const pick = id => {
+      document.querySelectorAll('#funnel .row').forEach(r => r.classList.toggle('on', r.dataset.id === id));
+      detail(D, list.find(c => c.id === id));
+    };
+    document.querySelectorAll('#funnel .row').forEach(r => {
+      r.onclick = () => pick(r.dataset.id);
+      r.onkeydown = e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pick(r.dataset.id); } };
+    });
+  }
+  function detail(D, c){
+    if (!c) return;
+    const v = D.ch[c.id] || {}, w = D.week[c.id] || {};
+    const steps = []; for (let k = 1; k <= 30; k++) if (v['s' + k] != null) steps.push([k, n0(v['s' + k])]);
+    $('detail').hidden = false;
+    $('dTitle').textContent = `${c.num} · ${c.name} — 화 안에서 어디까지 갔나`;
+    $('dSub').textContent = `들어온 횟수 ${fmt(v.enter)} · 끝낸 횟수 ${fmt(v.done)} · 최근 7일 시작 ${fmt(w.enter)} · 완주 ${fmt(w.done)}. 막대는 그 단계(끝낸 대화 수)까지 간 기기 수, 맨 오른쪽 초록 막대는 화를 끝낸 기기 수입니다.`;
+    const all = steps.concat([['완주', n0(v.uDone)]]);
+    const max = Math.max(1, n0(v.uEnter), ...all.map(s => s[1]));
+    $('dSteps').innerHTML = steps.length
+      ? all.map((s, i) => `<div class="${i === all.length - 1 ? 'end' : ''}" style="height:${Math.max(1.5, s[1] / max * 100)}%" title="${s[0]}${typeof s[0] === 'number' ? '단계' : ''}: ${fmt(s[1])}대"><span>${fmt(s[1])}</span></div>`).join('')
+      : '<p class="sub" style="grid-column:1/-1;align-self:center;text-align:center">이 화는 아직 단계 기록이 없습니다.</p>';
+    $('dX').innerHTML = steps.length ? all.map(s => `<span>${s[0]}</span>`).join('') : '';
+    $('detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  function errors(D){
+    $('errs').innerHTML = D.errs.length
+      ? '<table><tr><th>때</th><th>어디</th><th>무슨 오류</th><th>횟수</th><th>기기·판</th></tr>' +
+        D.errs.map(e => `<tr><td class="c">${esc(String(e.when || '').slice(0, 16).replace('T', ' '))}</td><td class="c">${esc(e.ch)}${e.zone ? ' · ' + esc(e.zone) : ''}</td><td class="m">${esc(e.msg)}<br><span style="color:var(--faint)">${esc(e.at)}</span></td><td class="c">${fmt(e.n)}</td><td class="c">${esc(e.p)} · v${esc(e.v)}</td></tr>`).join('') + '</table>'
+      : '<p class="sub">기록된 오류가 없습니다.</p>';
+  }
+  function draw(D, list){
+    $('gate').hidden = true; $('body').hidden = false;
+    tiles(D); dauChart(D); funnel(D, list); errors(D);
+  }
+
+  /* ---------- 시작 ---------- */
+  async function start(){
+    const list = await chapters();
+    if (DEMO){ $('demo').hidden = false; $('login').hidden = true; draw(demoData(list), list); return; }
+    if (!window.firebase || !window.FIREBASE_CONFIG){ $('gate').textContent = '파이어베이스 설정을 찾지 못했습니다.'; return; }
+    firebase.initializeApp(FIREBASE_CONFIG);
+    const auth = firebase.auth(), db = firebase.firestore();
+    async function show(){
+      $('gate').hidden = false; $('gate').textContent = '읽는 중…'; $('body').hidden = true;
+      try { draw(await load(db), list); }
+      catch(e){ $('gate').textContent = /permission/i.test(String(e && (e.code || e.message))) ? '이 계정은 통계를 볼 권한이 없습니다. 관리자 계정으로 로그인해 주세요.' : '읽지 못했습니다: ' + (e && e.message || e); }
+    }
+    $('login').onclick = () => auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(e => { $('gate').textContent = '로그인하지 못했습니다: ' + (e && e.message || e); });
+    $('logout').onclick = () => auth.signOut();
+    $('reload').onclick = show;
+    auth.onAuthStateChanged(u => {
+      $('login').hidden = !!u; $('logout').hidden = !u; $('reload').hidden = !u;
+      $('who').textContent = u ? (u.email || '') : '';
+      if (u) show(); else { $('body').hidden = true; $('gate').hidden = false; $('gate').textContent = '관리자 계정으로 로그인하면 통계가 보입니다.'; }
+    });
+  }
+  start().catch(e => { $('gate').textContent = '화면을 열지 못했습니다: ' + (e && e.message || e); });
+})();
+</script>
+</body>
+</html>
