@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
+# 수업 학습지(교사용 정답 포함)는 검색에 안 나오게 — 대시보드에서만 연결(2026-10-13)
+Disallow: /accounting-materials/
 Sitemap: https://tjddlf0224-sudo.github.io/sitemap.xml
