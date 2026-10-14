@@ -1,0 +1,15 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>청양고 경제버스 미션</title>
+<body style="font-family:sans-serif;padding:24px">불러오는 중…
+<script>
+(async () => {
+  const K = 'sb_publishable_yck2tAKApEjVSJOJMVSXuQ_AGaNatuI';
+  const page = new URLSearchParams(location.search).has('teacher') ? 'teacher' : 'mission';
+  const r = await fetch('https://pjagaulfivafamhhiveg.supabase.co/rest/v1/econbus_pages?select=html&name=eq.' + page, { headers: { apikey: K, Authorization: 'Bearer ' + K } });
+  const j = await r.json();
+  document.open(); document.write(j[0].html); document.close();
+})().catch(() => { document.body.textContent = '페이지를 불러오지 못했어요. 새로고침해 주세요.'; });
+</script>
+</body>
