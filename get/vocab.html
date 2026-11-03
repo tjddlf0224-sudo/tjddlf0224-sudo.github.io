@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Vocab Barista 받기</title>
+<!-- 자랑 카드 공유 링크(2026-11-03, 팀장 지시서 ~/개발팀/넘김/팀장_자랑카드_공유_2026-11-03.md)
+     기기를 보고 캠페인 링크로 바로 넘긴다: iOS ct=share_card / Android utm_campaign=share_card (~/홍보팀/캠페인_링크.md) -->
+<style>
+  :root { --bg:#f5f7fa; --card:#ffffff; --txt:#16202c; --dim:#5b6878; --brand:#3b2418; --accent:#e08a4c; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0b1118; --card:#141d28; --txt:#e8eef5; --dim:#9aa8b8; } }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px 16px;
+         background:var(--bg); color:var(--txt); font:16px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; }
+  .card { width:100%; max-width:380px; background:var(--card); border-radius:18px; padding:28px 22px; text-align:center;
+          box-shadow:0 8px 28px rgba(0,0,0,.10); border-top:6px solid var(--accent); }
+  h1 { margin:0 0 6px; font-size:1.35rem; text-wrap:balance; }
+  p { margin:0 0 22px; color:var(--dim); font-size:.95rem; }
+  a.btn { display:block; margin:10px 0; padding:14px 16px; border-radius:12px; text-decoration:none; font-weight:700;
+          background:var(--brand); color:#fff; }
+  a.btn:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+  .note { margin-top:16px; font-size:.8rem; color:var(--dim); }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Vocab Barista</h1>
+  <p>영단어를 카페 게임으로</p>
+  <a class="btn" id="ios" href="https://apps.apple.com/kr/app/apple-store/id6788029120?pt=128946368&amp;ct=share_card&amp;mt=8">App Store에서 받기</a>
+  <a class="btn" id="android" href="https://play.google.com/store/apps/details?id=com.yunsis.vocabbarista&amp;referrer=utm_source%3Dshare%26utm_medium%3Dcard%26utm_campaign%3Dshare_card">Google Play에서 받기</a>
+  <div class="note" id="note">잠시 뒤 스토어로 이동합니다</div>
+</div>
+<script>
+(function () {
+  var ua = navigator.userAgent || '';
+  var iOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var android = /Android/i.test(ua);
+  var to = iOS ? document.getElementById('ios').href : android ? document.getElementById('android').href : null;
+  if (to) location.replace(to);
+  else document.getElementById('note').textContent = '휴대폰에서 열면 바로 스토어로 이동합니다';
+})();
+</script>
+</body>
+</html>
