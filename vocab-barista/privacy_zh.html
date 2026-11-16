@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>單字咖啡師 隱私權政策</title>
-<!-- 초안(2026-11-14 대만·홍콩판 세션): 일본어판 privacy_ja.html(설치 경로 통계 포함, 3475747)을 번체 중국어로 옮긴 것. 홍보팀·팀장 검토 전, 공개 사이트에는 아직 안 올림 -->
+
 <style>
 body { background-color: #f5f5fa; margin: 0; padding: 32px 16px 60px; font-family: 'PingFang TC', 'Noto Sans TC', 'Helvetica Neue', sans-serif; color: #141322; }
 .wrap { max-width: 680px; margin: 0 auto; }
@@ -19,6 +19,16 @@ li { margin-bottom: 7px; }
 table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13.5px; }
 th, td { border: 1px solid #e2e2ec; padding: 9px 12px; text-align: left; vertical-align: top; }
 th { background: #f0f0f6; }
+.xfer { font-size: 13px; }
+.xfer th, .xfer td { padding: 8px 8px; overflow-wrap: break-word; }
+@media (max-width: 600px) {
+  .xfer, .xfer tbody, .xfer tr, .xfer td { display: block; width: auto; }
+  .xfer tr:first-child { display: none; }
+  .xfer tr { border: 1px solid #e2e2ec; margin-bottom: 10px; }
+  .xfer td { border: none; border-top: 1px solid #f0f0f6; }
+  .xfer td:first-child { border-top: none; background: #f0f0f6; font-weight: 700; }
+  .xfer td[data-h]::before { content: attr(data-h) "："; color: #585770; font-weight: 700; }
+}
 footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; font-size: 12px; color: #585770; }
 </style>
 </head>
@@ -27,9 +37,11 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; fon
 <p class="lang-switch" style="font-size:13px;margin:0 0 16px;"><a href="https://tjddlf0224-sudo.github.io/vocab-barista/privacy.html">한국어</a> · <a href="https://tjddlf0224-sudo.github.io/vocab-barista/privacy_ja.html">日本語</a> · <b>繁體中文</b></p>
 <h1>單字咖啡師 隱私權政策</h1>
 <p class="sub">Vocab Barista · Privacy Policy（繁體中文）</p>
-<p class="date">制定日期：2026 年 7 月 7 日、修訂：2026 年 11 月 10 日（韓文版）／繁體中文版：2026 年 11 月 14 日（含安裝來源統計）</p>
+<p class="date">制定日期：2026 年 7 月 7 日、修訂：2026 年 11 月 10 日（韓文版）／繁體中文版：2026 年 11 月 14 日（含安裝來源統計），2026 年 11 月 17 日修訂（營運者、資料跨境傳輸、未成年人、使用者權利）</p>
 
 <p>單字咖啡師（以下稱「本應用程式」）重視使用者的個人資料，並遵守個人資料保護相關法令。本政策說明本應用程式蒐集與使用哪些資料，以及如何保護與刪除這些資料。</p>
+
+<p><b>營運者：</b>單字咖啡師 個人開發者（大韓民國）／聯絡：tjddlf0224@gmail.com／如有需要，將於請求後儘速提供姓名及地址。</p>
 
 <h2>1. 蒐集的資料</h2>
 <p>本應用程式只蒐集提供服務所需的最少資料。不登入、以訪客身分遊玩時，遊戲進度（持有金幣、圖鑑、學習記錄等）只儲存在裝置內，不會傳送到伺服器。不過，為了改善服務，應用程式（iOS、Android）會以無法識別個人的形式，將下列「使用統計」與「匿名使用記錄」傳送到伺服器。</p>
@@ -39,7 +51,7 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; fon
 <tr><td>學習資料</td><td>遊戲進度（持有金幣、單字、角色圖鑑、學習統計等）</td><td>登入後自動同步時</td></tr>
 <tr><td>排行榜資料</td><td>使用者自行輸入的暱稱、分數</td><td>登上排行榜時</td></tr>
 <tr><td>使用統計（合計）</td><td>每日應用程式啟動、畫面顯示、遊戲開始/結束、獎勵廣告觀看次數的合計、累計使用天數的區間、學習答對率的合計（在裝置內計算，不含識別碼）。不含裝置、帳號識別碼、電子郵件地址、暱稱，只做數量加總。</td><td>使用應用程式時</td></tr>
-<tr><td>匿名使用記錄</td><td>與應用程式內隨機產生的號碼（匿名號碼）一起記錄的使用流程：應用程式啟動、結束、畫面切換、營業開始、結束、前往探險區域與戰鬥結果、作答的英文單字與答對、答錯、獎勵廣告的顯示、播放、獎勵、結束、各事件的時間、裝置種類（iOS/Android）與應用程式版本。匿名號碼不會與登入帳號、電子郵件地址、暱稱、廣告識別碼連結或一起儲存。重新安裝應用程式後會產生新的號碼。</td><td>使用應用程式時</td></tr>
+<tr><td>匿名使用記錄</td><td>與應用程式內隨機產生的號碼（匿名號碼）一起記錄的使用流程：應用程式啟動、結束、畫面切換、營業開始、結束、前往探險區域與戰鬥結果、作答的英文單字與答對、答錯、獎勵廣告的顯示、播放、獎勵、結束、各事件的時間、裝置種類（iOS/Android）、應用程式版本與應用程式組建編號、安裝來源商店（僅 Android）。匿名號碼不會與登入帳號、電子郵件地址、暱稱、廣告識別碼連結或一起儲存。重新安裝應用程式後會產生新的號碼。</td><td>使用應用程式時</td></tr>
 <tr><td>廣告識別碼</td><td>顯示廣告所需的裝置廣告識別碼等</td><td>顯示廣告時</td></tr>
 <tr><td>安裝來源統計</td><td>首次啟動 Android 版應用程式時，關於透過哪個管道（例如 Instagram、部落格、Google Play 搜尋）安裝的資訊（來源名稱、應用程式版本、日期）。不含可識別裝置或帳號的資訊，只用於統計各管道的安裝數。</td><td>Android 版首次啟動時（僅一次）</td></tr>
 </table>
@@ -55,22 +67,27 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; fon
 <li>改善服務與處理錯誤</li>
 </ul>
 
-<h2>3. 使用外部服務（委託、提供給第三方）</h2>
-<p>本應用程式不會將使用者的個人資料出售給第三方。不過，為了提供下列服務，本應用程式使用值得信賴的業者的基礎設施。這些業者可能在台灣、香港以外的地區（美國等）處理資料。</p>
-<ul>
-<li>Google Firebase（Google LLC）— 登入驗證、學習資料雲端儲存、使用統計、匿名使用記錄的儲存</li>
-<li>Google Analytics for Firebase（Google LLC）— 匿名使用記錄的分析（不傳送作答的單字與答對、答錯）</li>
-<li>Google AdMob（Google LLC）— 顯示應用程式內廣告</li>
-<li>Supabase（Supabase Inc.）— 記錄安裝來源統計（僅在 Android 版首次啟動時一次，不含可識別裝置、帳號的資訊）</li>
-</ul>
+<h2>3. 使用外部服務與資料跨境傳輸</h2>
+<p>本應用程式不會將使用者的個人資料出售給第三方。不過，為了提供下列服務，本應用程式使用下列業者的基礎設施。營運者位於大韓民國，因此對台灣、香港的使用者而言，下列資料會傳輸到台灣、香港以外的地區（大韓民國、美國等）處理與保存。</p>
+
+<table class="xfer">
+<tr><th>接收者（服務）</th><th>所在國家／地區</th><th>傳輸的項目</th><th>目的</th><th>保存期間</th></tr>
+<tr><td>Google LLC（Firebase 登入驗證）</td><td data-h="所在國家／地區">美國等（Google 的全球設施）</td><td data-h="傳輸的項目">電子郵件地址、登入帳號識別碼（僅登入時）</td><td data-h="目的">登入驗證</td><td data-h="保存期間">至刪除帳號為止</td></tr>
+<tr><td>Google LLC（Firebase 資料庫）</td><td data-h="所在國家／地區">大韓民國（首爾）</td><td data-h="傳輸的項目">學習資料、排行榜的暱稱與分數、使用統計（合計）、匿名使用記錄</td><td data-h="目的">雲端儲存與同步、排行榜、改善服務</td><td data-h="保存期間">學習資料與排行榜資料：至刪除帳號為止／匿名使用記錄：自蒐集日起 13 個月／使用統計（合計）：服務期間</td></tr>
+<tr><td>Google LLC（Google Analytics）</td><td data-h="所在國家／地區">美國等（Google 的全球設施）</td><td data-h="傳輸的項目">匿名使用記錄（不含作答的單字與答對、答錯）、廣告識別碼（裝置設定允許時）</td><td data-h="目的">分析使用流程</td><td data-h="保存期間">14 個月後自動刪除</td></tr>
+<tr><td>Google LLC（AdMob）</td><td data-h="所在國家／地區">美國等（Google 的全球設施）</td><td data-h="傳輸的項目">廣告識別碼等顯示廣告所需的資訊</td><td data-h="目的">顯示應用程式內廣告</td><td data-h="保存期間">依 Google 隱私權政策</td></tr>
+<tr><td>Supabase Inc.</td><td data-h="所在國家／地區">大韓民國（首爾）</td><td data-h="傳輸的項目">安裝來源統計（來源名稱、應用程式版本、日期；僅 Android 版首次啟動時一次，不含可識別裝置、帳號的資訊）</td><td data-h="目的">統計各管道的安裝數</td><td data-h="保存期間">自蒐集日起 13 個月</td></tr>
+</table>
 <p>各業者依其隱私權政策處理資料。（Google 隱私權政策：policies.google.com/privacy）</p>
+
+<p>使用本應用程式，即表示您同意將上述資料傳輸至境外（大韓民國、美國等）處理與保存。如不同意，請停止使用本應用程式，並可依第 6 節刪除帳號與資料。</p>
 
 <h2>4. 排行榜資料的公開</h2>
 <p>排行榜只會公開顯示使用者自行輸入的暱稱與分數。電子郵件地址等其他個人資料不會顯示在排行榜上。不當的暱稱會自動判定為不顯示，使用者也可以檢舉不當的暱稱。</p>
 
 <h2>5. 保存期間與刪除</h2>
 <p>蒐集的資料會在提供服務期間保存，刪除帳號時相關資料也會一併刪除。</p>
-<p>匿名使用記錄自蒐集日起超過 13 個月即刪除，Google Analytics 的事件資料保存 14 個月後自動刪除。使用統計（合計）以無法識別個人的數量形式，在服務期間保存。</p>
+<p>匿名使用記錄自蒐集日起超過 13 個月即刪除，Google Analytics 的事件資料保存 14 個月後自動刪除，安裝來源統計自蒐集日起超過 13 個月即刪除。使用統計（合計）以無法識別個人的數量形式，在服務期間保存。</p>
 
 <h2 id="delete">6. 刪除帳號與資料</h2>
 <p>使用者可以隨時刪除帳號與所有儲存的資料。</p>
@@ -81,13 +98,19 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; fon
 <p>匿名使用記錄未與帳號連結，因此不會隨帳號一併刪除，但超過上述保存期間後會自動刪除。刪除應用程式時，裝置內的匿名號碼也會一併消失。</p>
 
 <h2>7. 兒童的個人資料</h2>
-<p>本應用程式以 13 歲以上的使用者為對象。若發現為未滿 13 歲兒童的個人資料，將立即刪除。未成年人請在取得法定代理人（家長）同意後使用。</p>
+
+<p>本應用程式以 13 歲以上的使用者為對象。若發現為未滿 13 歲兒童的個人資料，將立即刪除。</p>
+<p>未滿 18 歲的使用者，請先取得法定代理人（家長或監護人）的同意，再登入或使用本應用程式。法定代理人也可以透過下方聯絡窗口，代為請求查詢或刪除資料。</p>
 
 <h2>8. 使用者的權利</h2>
-<p>使用者可以要求查詢、更正、刪除或停止使用自己的個人資料。請透過下方電子郵件地址提出申請。</p>
+
+<p>使用者可以就自己的個人資料，依台灣《個人資料保護法》第 3 條請求查詢或閱覽、製給複製本、補充或更正、停止蒐集、處理或利用，以及刪除；香港的使用者也可以依《個人資料（私隱）條例》要求查閱及改正自己的個人資料。請透過下方聯絡窗口提出申請，確認本人後會儘速處理。</p>
 
 <h2>9. 聯絡窗口</h2>
-<p>tjddlf0224@gmail.com（可使用中文、英文、韓文聯絡）</p>
+
+<p>處理個人資料查詢、更正等請求的負責人：單字咖啡師 個人開發者（大韓民國）</p>
+<p>電子郵件：tjddlf0224@gmail.com（可使用中文、英文、韓文聯絡）</p>
+<p>郵寄地址於請求時提供。如有需要，將於請求後儘速提供姓名及地址。</p>
 
 <h2>10. 政策的變更</h2>
 <p>本政策如有變更，將在應用程式內或本頁面公告。</p>
