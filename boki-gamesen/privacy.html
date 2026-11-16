@@ -18,6 +18,22 @@ li { margin-bottom: 7px; }
 table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13.5px; }
 th, td { border: 1px solid #e2e2ec; padding: 9px 12px; text-align: left; vertical-align: top; }
 th { background: #f0f0f6; }
+/* 列の多い表(3・4節)は、狭い画面では1行ずつカードのように縦に並べる */
+@media (max-width: 560px) {
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: auto; }
+  table.stack tr:first-child { display: none; }
+  table.stack tr { border: 1px solid #e2e2ec; border-radius: 8px; margin: 0 0 10px; background: #fff; }
+  table.stack td { border: 0; border-bottom: 1px solid #f0f0f6; padding: 7px 12px; }
+  table.stack td:last-child { border-bottom: 0; }
+  table.stack td::before { content: attr(data-label); display: block; font-size: 11.5px; color: #585770; font-weight: bold; }
+}
+/* 6列の表(3節)は、どの画面幅でもカードで並べる */
+table.cards, table.cards tbody, table.cards tr, table.cards td { display: block; width: auto; }
+table.cards tr:first-child { display: none; }
+table.cards tr { border: 1px solid #e2e2ec; border-radius: 8px; margin: 0 0 10px; background: #fff; }
+table.cards td { border: 0; border-bottom: 1px solid #f0f0f6; padding: 7px 12px; }
+table.cards td:last-child { border-bottom: 0; }
+table.cards td::before { content: attr(data-label); display: block; font-size: 11.5px; color: #585770; font-weight: bold; }
 footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; font-size: 12px; color: #585770; }
 </style>
 </head>
@@ -26,17 +42,17 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; fon
 <p class="lang-switch" style="font-size:13px;margin:0 0 16px;"><a href="https://sites.google.com/view/privacy-teacher-yun-game">한국어</a> · <a href="https://tjddlf0224-sudo.github.io/ledger-arcade/privacy.html">English</a> · <b>日本語</b> · <a href="https://tjddlf0224-sudo.github.io/ledger-arcade-tw/privacy.html">繁體中文</a></p>
 <h1>簿記ゲーセン プライバシーポリシー</h1>
 <p class="sub">Boki Game Center · Privacy Policy（日本語）</p>
-<p class="date">制定日：2026年11月14日・改定日：2026年11月16日（Android のインストール経路を追記）</p>
+<p class="date">制定日：2026年11月14日・改定日：2026年11月17日（外国にある第三者への提供・外部送信・安全管理措置・運営者を追記）</p>
 <p>簿記ゲーセン（以下「本アプリ」）は、利用者の個人情報を大切に扱い、個人情報の保護に関する法律その他の関係法令を守ります。本ポリシーでは、本アプリがどのような情報を取得・利用し、どのように保護・削除するかを説明します。</p>
 
 <h2>1. 取得する情報</h2>
 <p>本アプリは、サービスの提供に必要な最小限の情報だけを取得します。</p>
 <table>
 <tr><th>項目</th><th>内容</th><th>取得するとき</th></tr>
-<tr><td>アカウント情報</td><td>メールアドレス（Google・Apple・メールアドレスでログインした場合）</td><td>ログイン時（任意）</td></tr>
+<tr><td>アカウント情報</td><td>メールアドレス（Google・Apple でログインした場合）</td><td>ログイン時（任意）</td></tr>
 <tr><td>ニックネーム</td><td>利用者が自分で入力した、または自動でつけられたニックネーム</td><td>初回起動時・変更時</td></tr>
 <tr><td>学習データ</td><td>ゲームのスコア・ランク、難易度ごとの成績、間違えた問題（復習ノート）、理論クイズの単元別の正答状況。ニックネームとともに保存します。</td><td>ゲーム・クイズの終了時</td></tr>
-<tr><td>利用統計</td><td>アプリ内で無作為に作った端末番号とともに残す、日ごとの起動の有無・ゲームを始めた回数、および画面表示・広告視聴などの回数の合計。氏名・メールアドレス・広告識別子は含みません。</td><td>アプリ使用中</td></tr>
+<tr><td>利用統計</td><td>アプリ内で無作為に作った端末番号とともに残す、日ごとの起動の有無・ゲームを始めた回数、および画面表示・広告視聴などの回数の合計。氏名・メールアドレス・広告識別子は含みません。毎日の起動記録（日付・端末の種類・ランダムな端末番号）はニックネームと一緒に保存され、アカウントを削除するとこの記録のニックネームも削除します。</td><td>アプリ使用中</td></tr>
 <tr><td>匿名の利用記録</td><td>無作為に作った匿名番号とともに残す利用の流れ（アプリの起動・終了、画面の移動、ゲームの開始・終了、広告の提示・視聴、時刻、端末の種類とアプリのバージョン）。匿名番号はアカウント・メールアドレス・ニックネームと結びつけません。</td><td>アプリ使用中</td></tr>
 <tr><td>広告識別子</td><td>広告を表示するための端末の広告識別子など（iOS では利用者が許可した場合のみ）</td><td>広告表示時</td></tr>
 <tr><td>インストール経路</td><td>Android 版アプリを初めて起動したとき、どの経路（例：Instagram、ブログ、Google Play の検索）でインストールされたかの情報（経路名・アプリのバージョン・日付）。端末・アカウントを識別できる情報は含まず、経路ごとのインストール数の集計にだけ使います（Android のみ）</td><td>初回起動時に一度</td></tr>
@@ -51,37 +67,72 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; fon
 <li>アプリ内広告の表示</li>
 </ul>
 
-<h2>3. 外部サービスと国外での保存</h2>
-<p>本アプリは、次の外部サービスを利用します。情報は日本国外（大韓民国・アメリカ合衆国など）のサーバーに保存される場合があります。</p>
+<h2 id="overseas">3. 外部サービスと外国にある第三者への提供</h2>
+<p>本アプリは次の外部サービスを利用します。情報は日本国外（アメリカ合衆国・大韓民国など）のサーバーに保存されます。</p>
+<table class="stack cards">
+<tr><th>提供先</th><th>国（サーバー）</th><th>情報</th><th>目的</th><th>保存期間</th><th>連絡先</th></tr>
+<tr><td data-label="提供先">Google LLC（Firebase Authentication）</td><td data-label="国（サーバー）">アメリカ合衆国</td><td data-label="情報">Google・Apple アカウントのメールアドレス（Apple で「メールを非公開」を選んだ場合は Apple の中継用アドレス）・ログインID（Google・Apple でログインした場合のみ）</td><td data-label="目的">ログイン、複数の端末での学習記録の引き継ぎ</td><td data-label="保存期間">アカウント削除まで</td><td data-label="連絡先" class="url"><a href="https://support.google.com/policies?p=privpol_privts" target="_blank" rel="noopener">Google のお問い合わせ窓口</a></td></tr>
+<tr><td data-label="提供先">Google LLC（Google Analytics for Firebase）</td><td data-label="国（サーバー）">アメリカ合衆国</td><td data-label="情報">匿名の利用記録（画面の移動・ゲームの開始と終了・端末の種類・アプリのバージョン）</td><td data-label="目的">利用状況の分析とサービスの改善</td><td data-label="保存期間">14か月</td><td data-label="連絡先" class="url"><a href="https://support.google.com/policies?p=privpol_privts" target="_blank" rel="noopener">Google のお問い合わせ窓口</a></td></tr>
+<tr><td data-label="提供先">Google LLC（Google AdMob）</td><td data-label="国（サーバー）">アメリカ合衆国</td><td data-label="情報">広告識別子（iOS では利用者が許可した場合のみ）・端末情報</td><td data-label="目的">アプリ内広告の表示</td><td data-label="保存期間">Google のポリシーによる</td><td data-label="連絡先" class="url"><a href="https://support.google.com/policies?p=privpol_privts" target="_blank" rel="noopener">Google のお問い合わせ窓口</a></td></tr>
+<tr><td data-label="提供先">Apple Inc.（Sign in with Apple）</td><td data-label="国（サーバー）">アメリカ合衆国</td><td data-label="情報">Apple アカウントの情報（名前・メールアドレスは利用者が共有を選んだ場合のみ）</td><td data-label="目的">Apple でのログイン</td><td data-label="保存期間">Apple のポリシーによる</td><td data-label="連絡先" class="url"><a href="https://www.apple.com/legal/privacy/contact/" target="_blank" rel="noopener">Apple のお問い合わせ窓口</a></td></tr>
+<tr><td data-label="提供先">Supabase Pte. Ltd.（シンガポール）</td><td data-label="国（サーバー）">シンガポール／サーバー：大韓民国ソウル</td><td data-label="情報">ニックネーム・学習データ（スコア・間違えた問題・単元別の結果）・ログインした場合のログインID（uid）・ログイン方法（provider）・最終ログイン日時・クラスコード（クラスに参加した場合）・利用統計（無作為の端末番号。毎日の起動記録はニックネームと一緒に保存）・匿名の利用記録・インストール経路（Android のみ）</td><td data-label="目的">ランキング・成長グラフ・復習ノートの提供、利用統計</td><td data-label="保存期間">学習データはアカウント削除または削除依頼まで、匿名の利用記録・インストール経路は13か月</td><td data-label="連絡先" class="url"><a href="mailto:privacy@supabase.com">privacy@supabase.com</a></td></tr>
+</table>
 <ul>
-<li>Firebase Authentication・Google Analytics for Firebase（Google LLC・アメリカ合衆国）— ログイン、匿名の利用記録の分析</li>
-<li>Supabase（Supabase Inc.・サーバー所在地 大韓民国）— ニックネーム・学習データ・利用統計・インストール経路の保存</li>
-<li>Google AdMob（Google LLC・アメリカ合衆国）— アプリ内広告の表示</li>
+<li>提供先の国：アメリカ合衆国（Google LLC・Apple Inc.）、シンガポール（Supabase Pte. Ltd.）、大韓民国（Supabase のサーバー所在地）</li>
+<li>当該国の個人情報保護制度：個人情報保護委員会の<a href="https://www.ppc.go.jp/personalinfo/legal/kaiseihogohou/#gaikoku" target="_blank" rel="noopener">「外国における個人情報の保護に関する制度等の調査」</a>をご参照ください。</li>
+<li>講じている措置：委託先であるGoogle LLC（Firebase Authentication）およびSupabase Pte. Ltd.との間では、各社のデータ処理に関する契約条項（Google Cloud データ処理補足条項、Supabase データ処理契約）が適用されており、これにより提供先における個人情報保護法上の相当措置の継続的な実施を確保しています。</li>
+<li>提供の方法：アプリを使うときに、インターネットを通じて送信します。</li>
+<li>ログインしない：Firebase Authentication にログイン情報は送られません。ただし、複数の端末での学習記録の引き継ぎはできません。</li>
+<li>広告識別子を使わせない：iOS では「トラッキングを許可しない」を選びます。Android では、端末の「設定 → Google → 広告」または「設定 → プライバシー → 広告」で、広告のカスタマイズをオフにするか広告 ID を削除します。広告は表示されますが、利用者に合わせた広告ではなくなります。</li>
+<li>Supabase への保存は、ランキング・成長グラフ・復習ノートの機能に必要です。保存を望まない場合、これらの機能は利用できません。</li>
 </ul>
 <p>各事業者は、それぞれのプライバシーポリシーに従って情報を取り扱います（Google プライバシーポリシー：policies.google.com/privacy、Supabase：supabase.com/privacy）。</p>
 
-<h2>4. ランキング情報の公開</h2>
+<h2 id="external">4. 外部送信について</h2>
+<p>電気通信事業法第27条の12に基づき、本アプリから外部に送信される利用者の情報を次のとおり公表します。</p>
+<table class="stack">
+<tr><th>送信される情報の内容</th><th>送信先の名称</th><th>利用目的</th></tr>
+<tr><td data-label="送信される情報の内容">Google・Apple アカウントのメールアドレス（Apple で「メールを非公開」を選んだ場合は Apple の中継用アドレス）・ログインID（Google・Apple でログインした場合のみ）</td><td data-label="送信先の名称">Firebase Authentication（Google LLC）</td><td data-label="利用目的">ログイン、複数の端末での学習記録の引き継ぎ</td></tr>
+<tr><td data-label="送信される情報の内容">Apple でログインする場合の Apple アカウントの情報（名前・メールアドレスは利用者が共有を選んだ場合のみ）、ログイン画面で Apple のボタン画像を読み込むときの IP アドレス・端末の情報</td><td data-label="送信先の名称">Sign in with Apple（Apple Inc.）</td><td data-label="利用目的">Apple でのログイン、ログインボタンの表示</td></tr>
+<tr><td data-label="送信される情報の内容">匿名の利用記録（画面の移動・ゲームの開始と終了・端末の種類・アプリのバージョン）</td><td data-label="送信先の名称">Google Analytics for Firebase（Google LLC）</td><td data-label="利用目的">利用状況の分析とサービスの改善</td></tr>
+<tr><td data-label="送信される情報の内容">広告識別子（iOS では利用者が許可した場合のみ）・端末情報</td><td data-label="送信先の名称">Google AdMob（Google LLC）</td><td data-label="利用目的">アプリ内広告の表示</td></tr>
+<tr><td data-label="送信される情報の内容">ニックネーム・学習データ（スコア・間違えた問題・単元別の結果）・ログインした場合のログインID（uid）・ログイン方法（provider）・最終ログイン日時・クラスコード（クラスに参加した場合）・利用統計（無作為の端末番号。毎日の起動記録はニックネームと一緒に保存）・匿名の利用記録・インストール経路（Android のみ）</td><td data-label="送信先の名称">Supabase（Supabase Pte. Ltd.・シンガポール）</td><td data-label="利用目的">ランキング・成長グラフ・復習ノートの提供、利用統計</td></tr>
+<tr><td data-label="送信される情報の内容">IP アドレス・ブラウザ情報</td><td data-label="送信先の名称">fonts.googleapis.com（Google LLC）</td><td data-label="利用目的">画面表示用フォントの取得</td></tr>
+<tr><td data-label="送信される情報の内容">IP アドレス・ブラウザ情報</td><td data-label="送信先の名称">cdn.jsdelivr.net（Volentio JSD Limited・英国）</td><td data-label="利用目的">アプリ機能用ライブラリの取得</td></tr>
+</table>
+<p>送信を止める方法と、止めた場合の影響は、上の「3. 外部サービスと外国にある第三者への提供」のとおりです。</p>
+
+<h2>5. ランキング情報の公開</h2>
 <p>ランキングには、ニックネームとスコアだけが表示されます。メールアドレスなど、そのほかの情報は表示されません。</p>
 
-<h2>5. 保存期間と削除</h2>
-<p>取得した情報はサービスを提供する期間中保存し、アカウントを削除すると、そのニックネームに結びついた学習データも一緒に削除されます。匿名の利用記録は取得日から13か月を過ぎると削除します。利用統計の合計は、個人を特定できない数としてサービス期間中保存します。</p>
+<h2>6. 保存期間と削除</h2>
+<p>取得した情報はサービスを提供する期間中保存し、アカウントを削除すると、そのニックネームに結びついた学習データも一緒に削除されます。匿名の利用記録は、Supabase では取得日から13か月、Google Analytics for Firebase では14か月を過ぎると削除されます。毎日の起動記録（日付・端末の種類・ランダムな端末番号）はニックネームと一緒に保存され、アカウントを削除するとこの記録のニックネームも削除します。Android のインストール経路は、取得日から13か月を過ぎると削除します。利用統計の合計は、個人を特定できない数としてサービス期間中保存します。</p>
 
-<h2>6. アカウントとデータの削除</h2>
+<h2>7. アカウントとデータの削除</h2>
 <ul>
 <li><b>アプリ内で削除</b>：アプリを起動 → 設定 → アカウント削除 から、ご自身で削除できます（元に戻せません）。</li>
 <li><b>メールで依頼</b>：下記のメールアドレスにご依頼いただければ、本人確認のうえ3営業日以内に削除します。ログインしていない方は、お使いのニックネームをお知らせください。</li>
 </ul>
 
-<h2>7. お子さまの個人情報</h2>
-<p>本アプリは13歳以上の方を対象としています。13歳未満のお子さまの個人情報であることがわかった場合は、速やかに削除します。</p>
+<h2>8. お子さまの個人情報</h2>
+<p>本アプリは13歳以上の方を対象としています。18歳未満の方は、保護者の同意を得てご利用ください。13歳未満のお子さまの個人情報であることがわかった場合は、速やかに削除します。</p>
 
-<h2>8. 利用者の権利</h2>
+<h2 id="security">9. 安全管理措置</h2>
+<ul>
+<li>通信の暗号化：アプリとサーバーの間の通信は、HTTPS で暗号化しています。</li>
+<li>アクセスの制限：Supabase の行ごとのアクセス制御（RLS）で、記録を読み書きできる範囲を制限しています。</li>
+<li>管理用の鍵の管理：管理用の鍵はアプリに含めず、アプリには公開用の鍵だけを入れています。</li>
+<li>外部事業者の確認：利用する外部サービスの事業者が、個人情報の保護方針を公開し安全管理を行っていることを確認しています。</li>
+</ul>
+
+<h2>10. 利用者の権利</h2>
 <p>利用者は、ご自身の個人情報の開示、訂正、削除、利用停止を求めることができます。ご依頼は下記のメールアドレスで受け付けます。</p>
 
-<h2>9. お問い合わせ窓口</h2>
-<p>tjddlf0224@gmail.com（日本語・韓国語・英語でお問い合わせいただけます）</p>
+<h2 id="contact">11. 運営者・お問い合わせ窓口</h2>
+<p>運営者：簿記ゲーセン 個人開発者（大韓民国）／お問い合わせ：tjddlf0224@gmail.com／氏名・住所はご請求があれば遅滞なく回答します。</p>
+<p>個人情報の取扱いに関する苦情・ご相談も、上記のメールアドレスで受け付けます（日本語・韓国語・英語でお問い合わせいただけます）。</p>
 
-<h2>10. ポリシーの変更</h2>
+<h2>12. ポリシーの変更</h2>
 <p>本ポリシーを変更する場合は、アプリまたはこのページでお知らせします。</p>
 
 <footer>簿記ゲーセン · プライバシーポリシー · お問い合わせ tjddlf0224@gmail.com<br>「日商簿記」は日本商工会議所の登録商標です。本アプリは日本商工会議所とは関係ありません。</footer>

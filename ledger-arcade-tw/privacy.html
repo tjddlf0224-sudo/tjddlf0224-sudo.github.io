@@ -16,7 +16,7 @@ p { margin: 0 0 10px; }
 ul { margin: 8px 0 12px; padding-left: 20px; }
 li { margin-bottom: 7px; }
 table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13.5px; }
-th, td { border: 1px solid #e2e2ec; padding: 9px 12px; text-align: left; vertical-align: top; }
+th, td { border: 1px solid #e2e2ec; padding: 9px 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
 th { background: #f0f0f6; }
 footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; font-size: 12px; color: #585770; }
 </style>
@@ -26,17 +26,17 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; fon
 <p class="lang-switch" style="font-size:13px;margin:0 0 16px;"><a href="https://sites.google.com/view/privacy-teacher-yun-game">한국어</a> · <a href="https://tjddlf0224-sudo.github.io/ledger-arcade/privacy.html">English</a> · <a href="https://tjddlf0224-sudo.github.io/boki-gamesen/privacy.html">日本語</a> · <b>繁體中文</b></p>
 <h1>會計電玩館 隱私權政策</h1>
 <p class="sub">Ledger Arcade · Privacy Policy（繁體中文）</p>
-<p class="date">制定日期：2026年11月15日</p>
+<p class="date">制定日期：2026年11月15日 · 修訂施行日期：2026年11月17日</p>
 <p>會計電玩館（以下稱「本 App」）重視使用者的個人資料，並遵守相關法令。本政策說明本 App 會取得哪些資料、如何使用、保護與刪除。</p>
 
 <h2>1. 取得的資料</h2>
 <p>本 App 只取得提供服務所需的最少資料。</p>
 <table>
 <tr><th>項目</th><th>內容</th><th>取得時機</th></tr>
-<tr><td>帳號資料</td><td>電子郵件（使用 Google 或 Apple 登入時）</td><td>登入時（可選）</td></tr>
+<tr><td>帳號資料</td><td>電子郵件、帳號編號與登入方式（使用 Google 或 Apple 登入時）</td><td>登入時（可選）</td></tr>
 <tr><td>暱稱</td><td>使用者自行輸入，或由系統自動產生的暱稱</td><td>首次開啟、變更時</td></tr>
 <tr><td>學習資料</td><td>遊戲分數與等級、各難度的成績、答錯的題目（錯題本）、學科測驗各單元的答題狀況。會與暱稱一起儲存。</td><td>遊戲或測驗結束時</td></tr>
-<tr><td>使用統計</td><td>搭配 App 內隨機產生的裝置編號，記錄每天是否開啟、開始遊戲的次數，以及畫面瀏覽、觀看廣告等次數的合計。不含姓名、電子郵件與廣告識別碼。</td><td>使用 App 時</td></tr>
+<tr><td>使用統計</td><td>搭配 App 內隨機產生的裝置編號，記錄每天是否開啟、開始遊戲的次數，以及畫面瀏覽、觀看廣告等次數的合計。每天是否開啟的紀錄（日期、裝置類型、隨機裝置編號）會連同暱稱儲存；刪除帳號時，會一併刪除此紀錄中的暱稱。不含姓名、電子郵件與廣告識別碼。</td><td>使用 App 時</td></tr>
 <tr><td>匿名使用紀錄</td><td>搭配隨機產生的匿名編號，記錄使用流程（開啟與關閉 App、畫面切換、遊戲開始與結束、廣告顯示與觀看、時間、裝置類型與 App 版本）。匿名編號不會與帳號、電子郵件或暱稱連結。</td><td>使用 App 時</td></tr>
 <tr><td>廣告識別碼</td><td>為了顯示廣告而使用的裝置廣告識別碼等（iOS 僅在使用者允許時）</td><td>顯示廣告時</td></tr>
 <tr><td>安裝來源</td><td>用來了解 App 是從哪個管道安裝的資訊（僅限 Android）</td><td>首次開啟時</td></tr>
@@ -56,16 +56,31 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; fon
 <p>本 App 使用下列外部服務，資料可能儲存在台灣以外（大韓民國、美國等）的伺服器。</p>
 <ul>
 <li>Firebase Authentication、Google Analytics for Firebase（Google LLC，美國）：登入與匿名使用紀錄分析</li>
-<li>Supabase（Supabase Inc.，伺服器位於大韓民國）：儲存暱稱、學習資料與使用統計</li>
-<li>Google AdMob（Google LLC，美國）：在 App 內顯示廣告。Google AdMob 可能使用廣告識別碼顯示個人化廣告；可在 iOS 不允許「追蹤」，或在 Android 刪除或重設廣告 ID 來關閉。</li>
+<li>Sign in with Apple（Apple Inc.，美國）：選擇 Apple 登入時，用來確認 Apple 帳號</li>
+<li>Supabase（Supabase Pte. Ltd.，新加坡法人；伺服器位於大韓民國首爾）：儲存暱稱、學習資料、使用統計、匿名使用紀錄與安裝來源（僅限 Android）</li>
+<li>Google AdMob（Google LLC，美國）：在 App 內顯示廣告。Google AdMob 可能使用廣告識別碼顯示個人化廣告；可在 iOS 不允許「追蹤」，或在 Android 的 設定 → Google → 廣告（或 設定 → 隱私權 → 廣告）關閉個人化廣告或刪除廣告 ID。</li>
+<li>Google Fonts（Google LLC，美國）、jsDelivr（cdn.jsdelivr.net）：開啟畫面時載入字型與程式庫（Supabase 連線用），會傳送 IP 位址與瀏覽器、裝置資訊</li>
 </ul>
 <p>各業者依其隱私權政策處理資料（Google：policies.google.com/privacy，Supabase：supabase.com/privacy）。</p>
+<h3 style="font-size:14.5px;margin:18px 0 6px;">跨境傳輸明細</h3>
+<table>
+<tr><th>接收者</th><th>國家（伺服器所在地）</th><th>項目</th><th>目的</th><th>保存期間</th><th>聯絡方式</th></tr>
+<tr><td>Google LLC（Firebase Authentication）</td><td>美國</td><td>電子郵件、帳號編號（僅限選擇 Google 或 Apple 登入時）</td><td>登入、在多支裝置間接續學習紀錄</td><td>至刪除帳號為止</td><td>policies.google.com/privacy（「與我們聯絡」）</td></tr>
+<tr><td>Apple Inc.（Sign in with Apple）</td><td>美國</td><td>Apple 帳號識別碼、電子郵件（可選擇隱藏）（僅限選擇 Apple 登入時）</td><td>登入</td><td>依 Apple 隱私權政策</td><td>apple.com/legal/privacy/contact</td></tr>
+<tr><td>Google LLC（Google Analytics for Firebase）</td><td>美國</td><td>匿名使用紀錄（畫面切換、遊戲開始與結束、裝置類型、App 版本）</td><td>了解使用狀況、改善服務</td><td>14 個月</td><td>policies.google.com/privacy（「與我們聯絡」）</td></tr>
+<tr><td>Google LLC（Google AdMob）</td><td>美國</td><td>廣告識別碼（iOS 僅在允許追蹤時）、裝置資訊</td><td>顯示廣告</td><td>依 Google 隱私權政策</td><td>policies.google.com/privacy（「與我們聯絡」）</td></tr>
+<tr><td>Google LLC（Google Fonts）</td><td>美國</td><td>IP 位址、瀏覽器與裝置資訊</td><td>載入畫面字型</td><td>依 Google 隱私權政策</td><td>policies.google.com/privacy（「與我們聯絡」）</td></tr>
+<tr><td>Volentio JSD Limited（jsDelivr CDN）</td><td>英國（伺服器遍布全球）</td><td>IP 位址、瀏覽器與裝置資訊</td><td>載入連線用程式庫（supabase-js）</td><td>依 jsDelivr 隱私權政策</td><td>legal@jsdelivr.com</td></tr>
+<tr><td>Supabase Pte. Ltd.（新加坡法人）</td><td>伺服器：大韓民國首爾</td><td>暱稱、學習資料（分數、錯題、各單元成績）、使用統計（隨機裝置編號；每天是否開啟的紀錄連同暱稱）、匿名使用紀錄、安裝來源（僅限 Android）、登入時的帳號編號與登入方式、最後登入時間、班級代碼（加入班級時）</td><td>排行榜、成長曲線、錯題本、使用統計、在多支裝置間接續學習紀錄</td><td>學習資料至刪除帳號為止；登入時的帳號編號與登入方式至刪除帳號或提出刪除請求為止；每天是否開啟的紀錄中的暱稱至刪除帳號為止；匿名使用紀錄與安裝來源 13 個月</td><td>privacy@supabase.com</td></tr>
+</table>
+<p>傳輸方式：使用 App 時經由網際網路傳送。</p>
+<p>拒絕方式與效果：不登入，就不會傳送 Google 或 Apple 登入資料，但換手機時無法接續紀錄；不同意儲存到 Supabase，就無法使用排行榜、成長曲線與錯題本；在 iOS 不允許「追蹤」，或在 Android（設定 → Google → 廣告，或 設定 → 隱私權 → 廣告）關閉個人化廣告或刪除廣告 ID，仍會顯示廣告，但不是個人化廣告。字型與程式庫的載入是顯示畫面所必需。</p>
 
 <h2>4. 排行榜公開資訊</h2>
 <p>排行榜只會顯示暱稱與分數，不會顯示電子郵件等其他資料。</p>
 
 <h2>5. 保存期間與刪除</h2>
-<p>取得的資料在提供服務期間保存。刪除帳號時，與該暱稱連結的學習資料會一併刪除。匿名使用紀錄自取得日起超過 13 個月即刪除。使用統計的合計為無法識別個人的數字，於服務期間保存。</p>
+<p>取得的資料在提供服務期間保存。刪除帳號時，與該暱稱連結的學習資料會一併刪除。匿名使用紀錄儲存在 Supabase 的部分自取得日起超過 13 個月即刪除，Google Analytics for Firebase 的部分保存 14 個月。安裝來源（僅限 Android）自取得日起超過 13 個月即刪除。每天是否開啟的紀錄中的暱稱，會在刪除帳號時一併刪除。使用統計的合計為無法識別個人的數字，於服務期間保存。</p>
 
 <h2>6. 刪除帳號與資料</h2>
 <ul>
@@ -74,12 +89,13 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e2ec; fon
 </ul>
 
 <h2>7. 兒童的個人資料</h2>
-<p>本 App 的對象為 13 歲以上。若發現是未滿 13 歲兒童的資料，會儘速刪除。</p>
+<p>本 App 的對象為 13 歲以上。若發現是未滿 13 歲兒童的資料，會儘速刪除。未滿 18 歲者，請經法定代理人同意後使用。</p>
 
 <h2>8. 使用者的權利</h2>
 <p>使用者可依個人資料保護法第3條，就自己的個人資料請求查詢或閱覽、製給複製本、補充或更正、停止蒐集、處理或利用，以及刪除。請以下方電子郵件申請，確認本人後會儘速處理。</p>
 
 <h2>9. 聯絡方式</h2>
+<p>營運者：會計電玩館 個人開發者（大韓民國）／聯絡：tjddlf0224@gmail.com／如有需要，將於請求後儘速提供姓名及地址。</p>
 <p>tjddlf0224@gmail.com（可使用中文、英文、韓文洽詢）</p>
 
 <h2>10. 政策變更</h2>
