@@ -17,6 +17,7 @@ h1{font-size:1.45rem;margin:0 0 6px}
 h2{font-size:1.05rem;margin:30px 0 10px}
 p,li{color:var(--dim);font-size:.93rem}
 ul{padding-left:20px}
+.tbl{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88rem}.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;color:var(--dim);overflow-wrap:anywhere}.tbl th{color:var(--txt)}@media (max-width:560px){.tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:auto}.tbl tr:first-child{display:none}.tbl tr{border:1px solid var(--line);border-radius:10px;margin-bottom:10px}.tbl td{border:0;border-top:1px solid var(--line)}.tbl td:first-child{border-top:0;color:var(--txt);font-weight:600}.tbl td:not(:first-child)::before{content:attr(data-label) ": ";color:var(--txt);font-weight:600}}
 .box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
 footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:.8rem;text-align:center;color:rgba(234,242,255,.5)}
 </style>
@@ -24,52 +25,76 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
 <body>
 <div class="wrap">
 <h1>개인정보처리방침</h1>
-<p class="date">전산회계 오락실 웹사이트 · 시행일 2026년 9월 23일</p>
+<p class="date">전산회계 오락실 웹사이트 · 시행일 2026년 11월 17일</p>
 
-<p>이 방침은 <b>tjddlf0224-sudo.github.io</b> 웹사이트(홈, 웹에서 하는 전산회계 오락실 게임)에 적용됩니다.
-스마트폰 앱(App Store·Google Play)은 스토어에 등록된 앱 개인정보처리방침을 따릅니다.</p>
+<p>이 방침은 <b>tjddlf0224-sudo.github.io</b> 웹사이트(홈, 웹에서 하는 전산회계 오락실 게임)에 적용됩니다. 스마트폰 앱은 <a href="https://tjddlf0224-sudo.github.io/accounting-game-privacy/ko.html">앱 개인정보처리방침</a>을 따릅니다. 웹사이트에는 회원가입·로그인이 없고, 이메일·전화번호를 받지 않습니다.</p>
 
-<h2>1. 수집하는 정보와 이용 목적</h2>
+<h2>1. 처리하는 정보와 목적</h2>
 <ul>
-  <li><b>닉네임</b> — 처음 방문하면 "빠른사자4821"처럼 임의의 닉네임이 자동으로 정해지며, 원하면 바꿀 수 있습니다. 랭킹·팀전·오답노트에서 나를 구분하는 데 씁니다. 실명을 요구하지 않습니다.</li>
-  <li><b>학습 기록</b> — 게임 점수, 정답·오답 내역, 오답노트, 성장 기록, 팀전 기록.</li>
-  <li><b>소속 그룹(선택)</b> — 교사가 운영하는 학급·스터디 그룹에 참여한 경우 그룹 정보. 교사는 그룹 학생의 학습 현황을 볼 수 있습니다.</li>
-  <li><b>이용 통계</b> — 하루 방문 여부 등 익명에 가까운 이용 집계.</li>
+<li><b>닉네임</b> — 처음 방문하면 임의의 닉네임이 정해지고 바꿀 수 있습니다. 순위표·팀전·오답 노트에서 나를 구분합니다. 실명은 쓰지 마세요(순위표에 보입니다).</li>
+<li><b>학습 기록</b> — 게임 점수·순위, 단계별 결과, 틀린 문제(오답 노트), 이론 단원별 결과, 배지. 닉네임과 함께 저장합니다.</li>
+<li><b>교사가 운영하는 반(선택)</b> — 반 코드, 교사 이름, 교사가 등록한 학생 명단(학생 이름·반 표시·닉네임 연결), 교사가 입력한 자격시험 합격 여부. 교사가 반 학생의 학습 현황을 보는 데 씁니다.</li>
+<li><b>이용 통계</b> — 날마다 방문했는지·게임을 몇 판 했는지, 화면 본 횟수 합계. 브라우저가 만든 무작위 번호로 묶습니다. 이 중 매일 방문 기록(날짜·기기 종류·무작위 번호)은 닉네임과 함께 저장되며, 닉네임을 바꾸면 함께 바뀝니다.</li>
+<li><b>익명 이용 기록</b> — 화면 이동, 게임 시작·끝, 시각, 기기 종류. 무작위 익명 번호로만 묶고 닉네임과 연결하지 않습니다.</li>
 </ul>
-<p>웹사이트에는 회원가입·소셜 로그인이 없으며, 이메일·전화번호 등 연락처를 수집하지 않습니다.</p>
+<p>닉네임과 진행 상황(해금한 단계, 설정 등)은 이용자 브라우저 저장소(localStorage)에도 저장되며, 브라우저의 사이트 데이터를 지우면 함께 지워집니다.</p>
 
-<h2>2. 브라우저에 저장되는 정보</h2>
-<p>닉네임과 진행 상황(해금한 단계, 설정 등)은 이용자 기기의 브라우저 저장소(localStorage)에 저장됩니다. 브라우저의 사이트 데이터를 지우면 함께 지워집니다.</p>
-
-<h2>3. 쿠키와 광고</h2>
-<div class="box">
-<p>이 웹사이트는 Google AdSense 광고를 게재합니다.</p>
+<h2>2. 보유 기간과 파기</h2>
 <ul>
-  <li>Google을 포함한 제3자 공급업체는 <b>쿠키를 사용하여</b> 이용자가 이 웹사이트나 다른 웹사이트를 이전에 방문한 기록을 바탕으로 광고를 게재합니다.</li>
-  <li>Google은 광고 쿠키를 사용하여 이용자가 이 사이트 및 인터넷의 다른 사이트를 방문한 기록을 바탕으로 이용자와 Google 파트너가 광고를 게재할 수 있도록 합니다.</li>
-  <li>이용자는 <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google 광고 설정</a>에서 맞춤 광고를 사용 중지할 수 있습니다.</li>
-  <li>제3자 공급업체의 맞춤 광고용 쿠키는 <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">www.aboutads.info</a>에서 사용 중지할 수 있습니다.</li>
-  <li>Google이 광고 목적으로 정보를 사용하는 방식은 <a href="https://policies.google.com/technologies/partner-sites?hl=ko" target="_blank" rel="noopener">Google 파트너 사이트 정보 사용 방식</a>에서 확인할 수 있습니다.</li>
+<li>닉네임·학습 기록: 삭제를 요청할 때까지(교사가 반에서 학생을 지우면 그 반의 기록도 지웁니다). 삭제하면 매일 방문 기록의 닉네임도 지웁니다.</li>
+<li>익명 이용 기록: 13개월이 지나면 자동 삭제.</li>
+<li>교사 반 정보·학생 명단: 교사가 지우거나 반을 삭제할 때까지.</li>
+<li>사람을 알아볼 수 없는 이용 합계 숫자: 서비스를 운영하는 동안.</li>
+<li><b>파기 절차·방법</b>: 보유 기간이 끝나거나 삭제 요청을 받으면 확인 뒤 지체 없이 서버 데이터베이스에서 되살릴 수 없게 지웁니다. 종이로 보관하는 개인정보는 없습니다.</li>
 </ul>
-</div>
 
-<h2>4. 정보가 보관되는 곳과 제3자 서비스</h2>
+<h2>3. 국외 이전과 외부 서비스</h2>
+<p>웹사이트를 쓰면 아래 정보가 인터넷으로(암호화 전송) 아래 회사에 전달됩니다.</p>
+<table class="tbl">
+<tr><th>이전받는 자</th><th>나라</th><th>항목</th><th>목적</th><th>보유 기간</th><th>연락처</th></tr>
+<tr><td>Supabase Pte. Ltd.</td><td data-label="나라">싱가포르(회사) · 서버는 대한민국 서울</td><td data-label="항목">닉네임, 학습 기록, 반 정보·학생 명단, 이용 통계(매일 방문 기록의 닉네임 포함), 익명 이용 기록</td><td data-label="목적">순위표·성장 기록·오답 노트·교사 대시보드·이용 통계</td><td data-label="보유 기간">삭제 요청 때까지(익명 이용 기록 13개월)</td><td data-label="연락처">privacy@supabase.com</td></tr>
+<tr><td>GitHub, Inc. (GitHub Pages)</td><td data-label="나라">미국</td><td data-label="항목">접속할 때 IP 주소·브라우저 정보(접속 기록)</td><td data-label="목적">웹사이트 호스팅</td><td data-label="보유 기간">GitHub 정책에 따름</td><td data-label="연락처"><a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub 개인정보 안내</a></td></tr>
+<tr><td>Google LLC (Google Fonts)</td><td data-label="나라">미국</td><td data-label="항목">글꼴을 받을 때 IP 주소·브라우저 정보</td><td data-label="목적">글꼴 표시</td><td data-label="보유 기간">Google 정책에 따름</td><td data-label="연락처"><a href="https://support.google.com/policies?p=privpol_privts">Google 개인정보 문의</a></td></tr>
+<tr><td>Volentio JSD Limited (jsDelivr CDN)</td><td data-label="나라">영국(서버는 전 세계)</td><td data-label="항목">코드 라이브러리를 받을 때 IP 주소·브라우저 정보</td><td data-label="목적">서버와 연결하는 라이브러리 전달</td><td data-label="보유 기간">jsDelivr 정책에 따름</td><td data-label="연락처">legal@jsdelivr.com</td></tr>
+<tr><td>Google LLC (Google AdSense)</td><td data-label="나라">미국</td><td data-label="항목">홈 화면을 열 때 쿠키·IP 주소·브라우저 정보</td><td data-label="목적">광고(아래 4절)</td><td data-label="보유 기간">Google 정책에 따름</td><td data-label="연락처"><a href="https://support.google.com/policies?p=privpol_privts">Google 개인정보 문의</a></td></tr>
+</table>
+<p><b>거부 방법과 거부했을 때</b> — 닉네임·학습 기록을 서버에 저장하지 않기를 원하면 순위표·오답 노트·교사 대시보드를 쓸 수 없습니다. 언제든 삭제를 요청할 수 있습니다(5절). 광고 쿠키는 4절 방법으로 끌 수 있으며, 꺼도 사이트는 그대로 쓸 수 있습니다. 데이터 보관은 Supabase Pte. Ltd.에 맡기며(처리 위탁) Supabase 데이터 처리 계약이 적용됩니다.</p>
+
+<h2>4. 쿠키와 맞춤형 광고</h2>
 <ul>
-  <li><b>Supabase</b> — 닉네임, 학습 기록, 그룹 정보 저장</li>
-  <li><b>Google AdSense</b> — 광고 게재 및 광고 성과 측정</li>
-  <li><b>GitHub Pages</b> — 웹사이트 호스팅</li>
+<li>홈 화면에는 Google AdSense 스크립트가 있습니다. 게임 화면은 광고를 요청하지 않습니다.</li>
+<li>Google을 포함한 제3자 공급업체는 쿠키를 써서 이 사이트와 다른 사이트 방문 기록을 바탕으로 광고를 보여 줄 수 있습니다(행태정보). 운영자는 행태정보를 따로 모으지 않습니다.</li>
+<li>거부 방법: <a href="https://adssettings.google.com">Google 광고 설정</a>에서 맞춤 광고를 끌 수 있고, 제3자 맞춤 광고 쿠키는 <a href="https://www.aboutads.info">www.aboutads.info</a>에서 끌 수 있습니다. 브라우저 설정에서 쿠키를 막을 수도 있습니다.</li>
+<li>Google이 정보를 쓰는 방식: <a href="https://policies.google.com/technologies/partner-sites">Google 파트너 사이트 정보 사용 방식</a>.</li>
 </ul>
-<p>모든 전송은 암호화(HTTPS)됩니다. 위 서비스 제공 목적 외에 개인정보를 판매하거나 제3자에게 제공하지 않습니다.</p>
 
-<h2>5. 보관 기간과 삭제</h2>
-<p>학습 기록은 삭제를 요청할 때까지 보관합니다. 닉네임과 기록 삭제를 원하면 아래 이메일로 닉네임을 알려 주세요. 확인 후 지체 없이 삭제합니다.
-기기에 저장된 정보는 브라우저의 사이트 데이터 삭제로 직접 지울 수 있습니다.</p>
+<h2>5. 이용자의 권리와 행사 방법</h2>
+<p>이용자(만 14세 미만은 법정대리인)는 언제든 자기 개인정보의 열람·정정·삭제·처리정지를 요구할 수 있습니다. 아래 메일로 쓰는 닉네임을 알려 주시면 확인 뒤 지체 없이 처리합니다. 브라우저에 저장된 정보는 사이트 데이터 삭제로 직접 지울 수 있습니다.</p>
 
-<h2>6. 아동의 개인정보</h2>
-<p>이 웹사이트는 전산회계 자격증 학습용으로 만 14세 이상을 대상으로 합니다. 만 14세 미만 아동의 정보가 법정대리인 동의 없이 수집된 사실을 알게 되면 즉시 삭제합니다.</p>
+<h2>6. 만 14세 미만 아동</h2>
+<p>이 웹사이트는 전산회계 자격증 학습용으로 만 14세 이상을 대상으로 합니다. 만 14세 미만 아동은 법정대리인의 동의를 받은 뒤 이용해 주세요. 법정대리인의 동의 없이 만 14세 미만 아동의 정보가 처리된 사실을 알게 되면 바로 삭제합니다.</p>
 
-<h2>7. 개인정보 보호책임자 · 문의</h2>
-<p>개인정보 보호책임자: 윤성일(운영자)<br>개인정보 처리에 관한 문의·열람·정정·삭제 요청: <a href="mailto:tjddlf0224@gmail.com">tjddlf0224@gmail.com</a></p>
+<h2>7. 안전성 확보 조치</h2>
+<ul>
+<li>모든 전송은 암호화(HTTPS)합니다.</li>
+<li>서버 데이터베이스는 행 단위 접근 규칙(RLS)과 본인 확인 함수로 다른 사람의 기록을 고치거나 지우지 못하게 막습니다.</li>
+<li>관리자 키는 사이트에 넣지 않고 운영자만 보관합니다(사이트에는 공개용 키만 있음).</li>
+<li>교사 대시보드는 반 비밀번호를 서버가 확인한 뒤에만 학생 기록 삭제를 허용합니다.</li>
+</ul>
+
+<h2>8. 개인정보 보호책임자</h2>
+<p>개인정보 보호책임자: 윤성일(앱 운영자) · 이메일 <a href="mailto:tjddlf0224@gmail.com">tjddlf0224@gmail.com</a><br>개인정보 관련 문의·불만·피해 구제는 위 메일로 보내 주시면 지체 없이 답하고 처리합니다.</p>
+
+<h2>9. 권익침해 구제 방법</h2>
+<ul>
+<li>개인정보침해신고센터(한국인터넷진흥원): privacy.kisa.or.kr · 국번 없이 118</li>
+<li>개인정보분쟁조정위원회: www.kopico.go.kr · 1833-6972</li>
+<li>대검찰청 사이버수사과: www.spo.go.kr · 국번 없이 1301</li>
+<li>경찰청 사이버수사국: ecrm.police.go.kr · 국번 없이 182</li>
+</ul>
+
+<h2>10. 방침 변경</h2>
+<p>이 방침을 바꾸면 이 페이지에서 알려 드립니다. 이전 방침(2026년 9월 23일 시행)은 이 방침으로 대체됩니다.</p>
 
 <footer><a href="https://tjddlf0224-sudo.github.io/">홈</a> · <a href="https://tjddlf0224-sudo.github.io/account-game-level2-mobile/">전산회계 오락실</a></footer>
 </div>
