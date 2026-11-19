@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><title>send</title><script>
+// 홍보팀 내부 도구: ?img=파일명 의 그림을 부모(opener 또는 parent)에게 postMessage 로 넘긴다(계정 센터 프로필 사진 올리기용, 2026-11-19).
+(async()=>{const n=(location.search.match(/img=([\w.\-]+)/)||[])[1]; if(!n) return;
+ const b=await fetch(n).then(r=>r.arrayBuffer()); const t=window.opener||window.parent; t.postMessage({kind:'promo-img',name:n,buf:b},'*');
+ document.body.textContent='sent '+b.byteLength;})();
+</script><body>…</body>
