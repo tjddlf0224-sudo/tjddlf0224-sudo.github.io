@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ボキャバリスタ ダウンロード</title>
+<!-- 일본 인스타·스레드 프로필 링크용(2026-11-20): 아이폰은 일본 App Store, 안드로이드는 Play 스토어 앱(intent) → 안 되면 일반 Play 주소.
+     캠페인: 기본 insta_bio_jp, 주소 뒤 ?c=threads_jp 면 스레드. iOS ct= / Android utm_campaign= 같은 값. -->
+<style>
+  :root { --bg:#f5f7fa; --card:#ffffff; --txt:#16202c; --dim:#5b6878; --brand:#3b2418; --accent:#e08a4c; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0b1118; --card:#141d28; --txt:#e8eef5; --dim:#9aa8b8; } }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px 16px;
+         background:var(--bg); color:var(--txt); font:16px/1.5 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif; }
+  .card { width:100%; max-width:380px; background:var(--card); border-radius:18px; padding:28px 22px; text-align:center;
+          box-shadow:0 8px 28px rgba(0,0,0,.10); border-top:6px solid var(--accent); }
+  h1 { margin:0 0 6px; font-size:1.35rem; text-wrap:balance; }
+  p { margin:0 0 22px; color:var(--dim); font-size:.95rem; }
+  a.btn { display:block; margin:10px 0; padding:14px 16px; border-radius:12px; text-decoration:none; font-weight:700; background:var(--brand); color:#fff; }
+  a.btn:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+  .note { margin-top:16px; font-size:.8rem; color:var(--dim); }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>ボキャバリスタ</h1>
+  <p>無料でダウンロード</p>
+  <a class="btn" id="ios" href="#">App Store（iPhone）</a>
+  <a class="btn" id="play" href="#" style="background:#555">Google Play（Android）</a>
+  <div class="note" id="note">まもなくストアに移動します · 開かない場合は上のボタンを押してください</div>
+</div>
+<script>
+(function () {
+  var c = (new URLSearchParams(location.search).get('c') || 'insta_bio_jp').replace(/[^a-z0-9_]/gi, '');
+  var src = /^threads/.test(c) ? 'threads' : 'instagram';
+  var ios = 'https://apps.apple.com/jp/app/apple-store/id6788029120?pt=128946368&ct=' + c + '&mt=8';
+  var ref = 'utm_source%3D' + src + '%26utm_medium%3Dbio%26utm_campaign%3D' + c;
+  var web = 'https://play.google.com/store/apps/details?id=com.yunsis.vocabbarista&hl=ja&referrer=' + ref;
+  document.getElementById('ios').href = ios;
+  document.getElementById('play').href = web;
+  var ua = navigator.userAgent || '';
+  var iOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var android = /Android/i.test(ua);
+  try {
+    fetch('https://pjagaulfivafamhhiveg.supabase.co/rest/v1/link_clicks', { method:'POST', keepalive:true,
+      headers:{ 'apikey':'sb_publishable_yck2tAKApEjVSJOJMVSXuQ_AGaNatuI', 'Authorization':'Bearer sb_publishable_yck2tAKApEjVSJOJMVSXuQ_AGaNatuI', 'Content-Type':'application/json', 'Prefer':'return=minimal' },
+      body: JSON.stringify({ app:'vocab', platform: android ? 'android' : (iOS ? 'ios' : 'other'), campaign:c }) }).catch(function(){});
+  } catch (e) {}
+  if (android) {
+    var intent = 'intent://details?id=com.yunsis.vocabbarista&referrer=' + ref + '#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url=' + encodeURIComponent(web) + ';end';
+    document.getElementById('play').href = intent;
+    location.href = intent;
+    setTimeout(function () { if (!document.hidden) location.href = web; }, 1800);
+  } else if (iOS) {
+    location.replace(ios);
+  } else {
+    document.getElementById('note').textContent = 'スマートフォンで開くとストアに移動します';
+  }
+})();
+</script>
+</body>
+</html>
